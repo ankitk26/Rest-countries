@@ -1,22 +1,9 @@
 import { useContext, useEffect } from "react";
-import styled from "styled-components";
 import Countries from "../components/home/Countries";
 import FilterCountry from "../components/home/FilterCountry";
 import SearchCountry from "../components/home/SearchCountry";
 import { CountryContext } from "../context/CountryContext";
-
-const HomeContainer = styled.div`
-  margin: 2rem auto;
-  width: 90%;
-`;
-
-const SearchContainer = styled.div`
-  @media only screen and (min-width: 975px) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-`;
+import { HomeContainer, SearchContainer } from "../styles/home_page_styles";
 
 export default function Home({ countries }) {
   const {
@@ -45,16 +32,17 @@ export default function Home({ countries }) {
 }
 
 export const getStaticProps = async () => {
-  const resp = await fetch("https://restcountries.eu/rest/v2/all");
-  let countries = await resp.json();
+  const resp = await fetch("https://restcountries.com/v3.1/all");
+  const countries = await resp.json().then((countries) =>
+    countries.map((country) => ({
+      name: country.name.common,
+      capital: country.capital ? country.capital[0] : "",
+      population: country.population,
+      region: country.region,
+      flag: country.flags.png,
+    }))
+  );
 
-  countries = countries.map((country) => ({
-    name: country.name,
-    capital: country.capital,
-    population: country.population,
-    region: country.region,
-    flag: country.flag,
-  }));
-
-  return { props: { countries } };
+  console.log(countries[0]);
+  return { props: { countries: countries } };
 };
