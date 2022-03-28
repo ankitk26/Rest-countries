@@ -14,6 +14,7 @@ import {
   CountryInfoLower,
   CountryName,
 } from "../styles/country_page_styles";
+import Layout from "../components/layouts/Layout";
 
 export default function CountryPage({ country, borders }) {
   if (!country) {
@@ -25,91 +26,101 @@ export default function CountryPage({ country, borders }) {
   };
 
   return (
-    <Container>
-      <BackButton onClick={goHome}>
-        <span className="material-icons">keyboard_backspace</span>
-        <span>Back</span>
-      </BackButton>
+    <Layout title={country ? country.name.common : "Loading..."}>
+      <Container>
+        <BackButton onClick={goHome}>
+          <span className="material-icons">keyboard_backspace</span>
+          <span>Back</span>
+        </BackButton>
 
-      <CountryContainer>
-        <Image
-          height={400}
-          width={600}
-          objectFit="contain"
-          src={country.flags.svg}
-          alt={country.name}
-        />
+        <CountryContainer>
+          <Image
+            height={400}
+            width={600}
+            objectFit="contain"
+            src={country.flags.svg}
+            alt={country.name.common}
+          />
 
-        <div>
-          <CountryName>{country.name.common}</CountryName>
+          <div>
+            <CountryName>{country.name.common}</CountryName>
 
-          <CountryInfoContainer>
-            <CountryInfo>
-              <div>
-                <strong>Native name: </strong>
-                <span>{country.name.official}</span>
-              </div>
-              <div>
-                <strong>Population: </strong>
-                <span>{formatPopulation(country.population)}</span>
-              </div>
-              <div>
-                <strong>Region: </strong>
-                <span>{country.region}</span>
-              </div>
-              {country.subregion && (
+            <CountryInfoContainer>
+              <CountryInfo>
                 <div>
-                  <strong>Sub Region: </strong>
-                  <span>{country.subregion}</span>
+                  <strong>Native name: </strong>
+                  <span>{country.name.official}</span>
                 </div>
-              )}
-              {country.capital && (
+                {country.population && (
+                  <div>
+                    <strong>Population: </strong>
+                    <span>{formatPopulation(country.population)}</span>
+                  </div>
+                )}
                 <div>
-                  <strong>Capital: </strong>
-                  <span>{country.capital}</span>
+                  <strong>Region: </strong>
+                  <span>{country.region}</span>
                 </div>
-              )}
-            </CountryInfo>
+                {country.subregion && (
+                  <div>
+                    <strong>Sub Region: </strong>
+                    <span>{country.subregion}</span>
+                  </div>
+                )}
+                {country.capital && (
+                  <div>
+                    <strong>Capital: </strong>
+                    <span>{country.capital}</span>
+                  </div>
+                )}
+              </CountryInfo>
 
-            <CountryInfoLower>
-              <div>
-                <strong>Top level Domain: </strong>
-                <span>{country.tld[0]}</span>
-              </div>
-              <div>
-                <strong>Currencies: </strong>
-                <span>
-                  {Object.values(country.currencies)
-                    .map((currency) => currency.name)
-                    .join(", ")}
-                </span>
-              </div>
-              <div>
-                <strong>Languages: </strong>
-                <span>
-                  {Object.values(country.languages)
-                    .map((currency) => currency)
-                    .join(", ")}
-                </span>
-              </div>
-            </CountryInfoLower>
-          </CountryInfoContainer>
+              <CountryInfoLower>
+                {country.tld && (
+                  <div>
+                    <strong>Top level Domain: </strong>
+                    <span>{country.tld[0]}</span>
+                  </div>
+                )}
+                {country.currencies && (
+                  <div>
+                    <strong>Currencies: </strong>
+                    <span>
+                      {Object.values(country.currencies)
+                        .map((currency) => currency.name)
+                        .join(", ")}
+                    </span>
+                  </div>
+                )}
+                {country.languages && (
+                  <div>
+                    <strong>Languages: </strong>
+                    <span>
+                      {Object.values(country.languages)
+                        .map((currency) => currency)
+                        .join(", ")}
+                    </span>
+                  </div>
+                )}
+              </CountryInfoLower>
+            </CountryInfoContainer>
 
-          {borders?.length > 0 && (
-            <BorderCountriesContainer>
-              <h2>Border Countries: </h2>
-              <BorderCountries>
-                {borders?.map((border, index) => (
-                  <Link href={`/${border}`} key={index} passHref>
-                    <BorderCountry>{border}</BorderCountry>
-                  </Link>
-                ))}
-              </BorderCountries>
-            </BorderCountriesContainer>
-          )}
-        </div>
-      </CountryContainer>
-    </Container>
+            {borders?.length > 0 && (
+              <BorderCountriesContainer>
+                <h2>Border Countries: </h2>
+                <BorderCountries>
+                  {borders?.map((border, index) => (
+                    <Link href={`/${border}`} key={index} passHref>
+                      <BorderCountry>{border}</BorderCountry>
+                    </Link>
+                  ))}
+                </BorderCountries>
+              </BorderCountriesContainer>
+            )}
+          </div>
+        </CountryContainer>
+      </Container>
+    </Layout>
   );
 }
 

@@ -15,6 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const HeaderTitle = styled.a`
   text-decoration: none;
+  color: ${(props) => props.theme.text};
   cursor: pointer;
 `;
 

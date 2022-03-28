@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import CountriesList from "../components/home/CountriesList";
 import FilterCountry from "../components/home/FilterCountry";
 import SearchCountry from "../components/home/SearchCountry";
+import Layout from "../components/layouts/Layout";
 import { CountryContext } from "../context/CountryContext";
 import { HomeContainer, SearchContainer } from "../styles/home_page_styles";
 
@@ -21,15 +22,17 @@ export default function Home({ countries }) {
   }, [region]);
 
   return (
-    <HomeContainer>
-      <SearchContainer>
-        <SearchCountry />
-        <FilterCountry />
-      </SearchContainer>
-      <CountriesList
-        countries={search || region ? filteredCountries : countries}
-      />
-    </HomeContainer>
+    <Layout title={search ? `Search for ${search}` : "All countries"}>
+      <HomeContainer>
+        <SearchContainer>
+          <SearchCountry />
+          <FilterCountry />
+        </SearchContainer>
+        <CountriesList
+          countries={search || region ? filteredCountries : countries}
+        />
+      </HomeContainer>
+    </Layout>
   );
 }
 

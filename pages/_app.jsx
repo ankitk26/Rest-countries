@@ -25,10 +25,10 @@ function MyApp({ Component, pageProps }) {
     <CountryProvider>
       <ThemeProvider theme={themeMode}>
         <GlobalStyle />
-        <Layout>
-          <Header theme={theme} toggleTheme={themeToggler} />
-          <Component {...pageProps} />
-        </Layout>
+        {/* <Layout> */}
+        <Header theme={theme} toggleTheme={themeToggler} />
+        <Component {...pageProps} />
+        {/* </Layout> */}
       </ThemeProvider>
     </CountryProvider>
   );

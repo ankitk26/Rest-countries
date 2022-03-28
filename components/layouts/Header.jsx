@@ -11,7 +11,7 @@ export default function Header({ theme, toggleTheme }) {
   return (
     <AppBar>
       <HeaderContainer>
-        <Link href="/">
+        <Link href="/" passHref>
           <HeaderTitle>
             <h2>Where in the world?</h2>
           </HeaderTitle>

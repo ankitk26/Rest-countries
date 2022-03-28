@@ -12,7 +12,7 @@ import { formatPopulation } from "../../utils/formatPopulation";
 
 export default function CountryCard({ country }) {
   return (
-    <Link href={`/${country.cca2}`}>
+    <Link href={`/${country.cca2}`} passHref>
       <CountryCardContainer>
         <FlagContainer>
           <CountryFlag layout="fill" src={country.flag} alt={country.name} />
