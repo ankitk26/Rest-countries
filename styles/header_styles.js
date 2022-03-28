@@ -13,12 +13,12 @@ export const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-export const BrandText = styled.a`
+export const HeaderTitle = styled.a`
   text-decoration: none;
   cursor: pointer;
 `;
 
-export const ChangeThemeButton = styled.button`
+export const ToggleThemeButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -29,5 +29,13 @@ export const ChangeThemeButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+`;
+
+export const ThemeText = styled.h4`
+  display: none;
+
+  @media all and (min-width: 975px) {
+    display: block;
   }
 `;

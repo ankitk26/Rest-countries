@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CountriesContainer = styled.div`
+export const CountriesListContainer = styled.div`
   margin: 2rem auto;
   display: grid;
   width: 75%;

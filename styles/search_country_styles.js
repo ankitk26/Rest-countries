@@ -5,9 +5,9 @@ export const SearchContainer = styled.div`
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 `;
 
 export const SearchInput = styled.input`

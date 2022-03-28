@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 2rem auto;
-  width: 85%;
+  width: 90%;
 `;
 
 export const BackButton = styled.button`

@@ -2,7 +2,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Header from "../components/layouts/Header";
 import Layout from "../components/layouts/Layout";
 import CountryProvider from "../context/CountryContext";
-import { darkTheme, lightTheme } from "../src/Themes";
+import { darkTheme, lightTheme } from "../src/themes";
 import { useDarkMode } from "../src/useDarkMode";
 
 const GlobalStyle = createGlobalStyle`

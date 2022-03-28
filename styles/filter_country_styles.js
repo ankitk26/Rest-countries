@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FilterContainer = styled.div`
   margin-top: 2rem;
   width: max-content;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
   border-radius: 0.5rem;
   :focus {
     outline: none;

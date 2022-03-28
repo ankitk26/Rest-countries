@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Router from "next/router";
-import React from "react";
 import Image from "next/image";
 import { formatPopulation } from "../utils/formatPopulation";
 import {
@@ -37,18 +36,18 @@ export default function CountryPage({ country, borders }) {
           height={400}
           width={600}
           objectFit="contain"
-          src={country.flag}
+          src={country.flags.svg}
           alt={country.name}
         />
 
         <div>
-          <CountryName>{country.name}</CountryName>
+          <CountryName>{country.name.common}</CountryName>
 
           <CountryInfoContainer>
             <CountryInfo>
               <div>
                 <strong>Native name: </strong>
-                <span>{country.nativeName}</span>
+                <span>{country.name.official}</span>
               </div>
               <div>
                 <strong>Population: </strong>
@@ -75,12 +74,12 @@ export default function CountryPage({ country, borders }) {
             <CountryInfoLower>
               <div>
                 <strong>Top level Domain: </strong>
-                <span>{country.topLevelDomain[0]}</span>
+                <span>{country.tld[0]}</span>
               </div>
               <div>
                 <strong>Currencies: </strong>
                 <span>
-                  {country.currencies
+                  {Object.values(country.currencies)
                     .map((currency) => currency.name)
                     .join(", ")}
                 </span>
@@ -88,8 +87,8 @@ export default function CountryPage({ country, borders }) {
               <div>
                 <strong>Languages: </strong>
                 <span>
-                  {country.languages
-                    .map((language) => language.name)
+                  {Object.values(country.languages)
+                    .map((currency) => currency)
                     .join(", ")}
                 </span>
               </div>
@@ -115,11 +114,11 @@ export default function CountryPage({ country, borders }) {
 }
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://restcountries.eu/rest/v2/all");
+  const res = await fetch("https://restcountries.com/v3.1/all");
   const countries = await res.json();
 
   const paths = countries.map((country) => ({
-    params: { country: country.name },
+    params: { country_code: country.cca2 },
   }));
 
   return {
@@ -129,20 +128,20 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const country = params.country;
-  console.log(country);
-  const res = await fetch(
-    `https://restcountries.eu/rest/v2/name/${country}?fullText=true`
-  );
+  const code = params.country_code;
+  const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
   const json = await res.json();
 
-  const apiCalls = json[0].borders.map((code) =>
-    fetch(`https://restcountries.eu/rest/v2/alpha/${code}`)
-  );
+  let borders = null;
+  if (json[0].borders) {
+    const borderCodes = json[0].borders.join(",");
+    const borderCountriesResp = await fetch(
+      `https://restcountries.com/v3.1/alpha?codes=${borderCodes}`
+    );
+    const borderCountriesJson = await borderCountriesResp.json();
 
-  const borders = await Promise.all(apiCalls)
-    .then((values) => Promise.all(values.map((value) => value.json())))
-    .then((countries) => countries.map((country) => country.name));
+    borders = borderCountriesJson.map((country) => country.name.common);
+  }
 
   return { props: { country: json[0], borders } };
 };

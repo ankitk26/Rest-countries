@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CountryContext } from "../../context/CountryContext";
 import {
   FilterButton,
@@ -16,7 +16,6 @@ export default function FilterCountry() {
 
   const handleRegionChange = (e) => {
     setRegion(e.target.value);
-    console.log(e.target.value);
   };
 
   return (

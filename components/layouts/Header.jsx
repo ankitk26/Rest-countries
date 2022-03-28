@@ -1,10 +1,10 @@
 import Link from "next/link";
-import React from "react";
 import {
   AppBar,
-  BrandText,
-  ChangeThemeButton,
+  ToggleThemeButton,
   HeaderContainer,
+  HeaderTitle,
+  ThemeText,
 } from "../../styles/header_styles";
 
 export default function Header({ theme, toggleTheme }) {
@@ -12,16 +12,17 @@ export default function Header({ theme, toggleTheme }) {
     <AppBar>
       <HeaderContainer>
         <Link href="/">
-          <BrandText>
+          <HeaderTitle>
             <h2>Where in the world?</h2>
-          </BrandText>
+          </HeaderTitle>
         </Link>
-        <ChangeThemeButton onClick={toggleTheme}>
+
+        <ToggleThemeButton onClick={toggleTheme}>
           <span className="material-icons">
             {theme === "light" ? "light_mode" : "dark_mode"}
           </span>
-          <h4>{theme === "light" ? "Light" : "Dark"} mode</h4>
-        </ChangeThemeButton>
+          <ThemeText>{theme === "light" ? "Light" : "Dark"} mode</ThemeText>
+        </ToggleThemeButton>
       </HeaderContainer>
     </AppBar>
   );

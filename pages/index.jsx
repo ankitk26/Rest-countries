@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import Countries from "../components/home/Countries";
+import CountriesList from "../components/home/CountriesList";
 import FilterCountry from "../components/home/FilterCountry";
 import SearchCountry from "../components/home/SearchCountry";
 import { CountryContext } from "../context/CountryContext";
@@ -26,7 +26,9 @@ export default function Home({ countries }) {
         <SearchCountry />
         <FilterCountry />
       </SearchContainer>
-      <Countries countries={search || region ? filteredCountries : countries} />
+      <CountriesList
+        countries={search || region ? filteredCountries : countries}
+      />
     </HomeContainer>
   );
 }
@@ -39,10 +41,10 @@ export const getStaticProps = async () => {
       capital: country.capital ? country.capital[0] : "",
       population: country.population,
       region: country.region,
-      flag: country.flags.png,
+      flag: country.flags.svg,
+      cca2: country.cca2,
     }))
   );
 
-  console.log(countries[0]);
   return { props: { countries: countries } };
 };

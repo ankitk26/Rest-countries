@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React from "react";
 import {
-  CountryContainer,
+  CountryCardContainer,
   CountryFlag,
   CountryInfo,
   CountryInfoContainer,
@@ -11,17 +10,12 @@ import {
 } from "../../styles/country_styles";
 import { formatPopulation } from "../../utils/formatPopulation";
 
-export default function Country({ country }) {
+export default function CountryCard({ country }) {
   return (
-    <Link href={`/${country.name}`} passHref>
-      <CountryContainer>
+    <Link href={`/${country.cca2}`}>
+      <CountryCardContainer>
         <FlagContainer>
-          <CountryFlag
-            layout="fill"
-            objectFit="cover"
-            src={country.flag}
-            alt={country.name}
-          />
+          <CountryFlag layout="fill" src={country.flag} alt={country.name} />
         </FlagContainer>
 
         <CountryInfoContainer>
@@ -46,7 +40,7 @@ export default function Country({ country }) {
             )}
           </CountryInfo>
         </CountryInfoContainer>
-      </CountryContainer>
+      </CountryCardContainer>
     </Link>
   );
 }

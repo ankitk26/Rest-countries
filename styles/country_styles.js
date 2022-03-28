@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export const CountryContainer = styled.div`
+export const CountryCardContainer = styled.div`
   background-color: ${(props) => props.theme.elements};
   border-radius: 0.5rem;
   max-width: 100%;
@@ -37,7 +37,7 @@ export const InfoItem = styled.div`
 `;
 
 export const FlagContainer = styled.div`
-  width: "100%";
+  width: 100%;
   height: 200px;
   position: relative;
 `;
