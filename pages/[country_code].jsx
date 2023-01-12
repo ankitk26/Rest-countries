@@ -109,9 +109,9 @@ export default function CountryPage({ country, borders }) {
               <BorderCountriesContainer>
                 <h2>Border Countries: </h2>
                 <BorderCountries>
-                  {borders?.map((border, index) => (
-                    <Link href={`/${border}`} key={index} passHref>
-                      <BorderCountry>{border}</BorderCountry>
+                  {borders?.map((border) => (
+                    <Link href={`/${border.cca2}`} key={border.cca2} passHref>
+                      <BorderCountry>{border.name}</BorderCountry>
                     </Link>
                   ))}
                 </BorderCountries>
@@ -151,7 +151,11 @@ export const getStaticProps = async ({ params }) => {
     );
     const borderCountriesJson = await borderCountriesResp.json();
 
-    borders = borderCountriesJson.map((country) => country.name.common);
+    borders = borderCountriesJson.map((country) => ({
+      name: country.name.common,
+      cca2: country.cca2,
+    }));
+    console.log(borders);
   }
 
   return { props: { country: json[0], borders } };
