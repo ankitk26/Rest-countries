@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    background: 0 0% 98%;
+    foreground: 200 15% 8%;
+    paper: 0 0% 52%;
+    secondary: 0 0 100%;
+  }
+
+  .dark {
+    background: 207 26% 17%;
+    foreground: 0 0 100%;
+    paper: 209 23% 22%;
+    secondary: 209 23 22%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.my-shadow {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.country-card-shadow {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
